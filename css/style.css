@@ -1,10 +1,12 @@
 @import url("reset.css");
 @import url("photographer.css");
+@import url("lightbox.css");
 
 body {
     font-family: "DM Sans", sans-serif;
     font-weight: normal;
     margin: 0;
+    box-sizing: border-box;
 }
 
 
@@ -14,6 +16,10 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+}
+
+main{
+    padding:100px;
 }
 
 h1 {
@@ -78,5 +84,5 @@ h1 {
 }
 
 .photographer_section article:hover img{
-   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }

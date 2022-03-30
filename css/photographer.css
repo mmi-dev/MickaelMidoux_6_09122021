@@ -1,11 +1,33 @@
-#contact_modal {
-    display: none;
-}
-
 .photograph-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     background-color: #FAFAFA;
+    width:95%;
     height: 300px;
-    margin: 0 100px;
+    padding: 0 50px;
+    margin: 0 auto;
+    /* margin: 0 100px; */
+}
+.photograph-header div {
+    align-items: center;
+}
+.photograph-header h2 {
+    color: #D3573C;
+    font-size: 64px;
+    line-height: 75px;
+    margin: 30px 0 0;
+}
+.photograph-header .location {
+    color: #901C1C;
+    font-size: 24px;
+    line-height: 35px;
+}
+.photograph-header .slogan {
+    color: black;
+    font-size: 18px;
+    line-height: 25px;
 }
 
 .contact_button {
@@ -13,29 +35,154 @@
     font-weight: bold;
     color: white;
     padding: 11px;
+    margin: 0 30px;
     width: 170px;
     height: 70px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+
+}
+.photographer_avatar{
+    align-items: center;
+
+}
+.photographer_avatar img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius:50%;
+    align-self: flex-end;
+}
+
+/* section de tri */
+
+.sort{
+    margin-top:20px;
+}
+.sort label{
+    font-weight:bold;
+    font-size: 16px;
+}
+#sort-select{
+    background: #901C1C;
+    color: #fff;
+    padding: 11px;
+    border-radius: 5px;
+    border:none;
+    margin-left: 20px;
+}
+#sort-select option{
+    background: #901C1C;
+    color: #fff;
+    padding: 11px;
+    border-radius: 5px;
+    border:none;
+    margin-left: 20px;
+}
+
+
+
+/* vignette des medias */
+
+.medias_section{
+    display: grid;
+    /* flex-direction: row;
+    flex-wrap: wrap; */
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    justify-items: center;
+    margin-top: 50px;
+}
+.medias_section article{
+    /* min-width: 30%; */
+    align-self: center;
+    
+   max-width: 350px;
+}
+.medias_section article .media__link img{
+   width: 350px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.medias_section article .media-details{
+    display: flex;
+    flex-direction: row;
+    height: 51px;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 24px;
+    color:#901C1C;
+}
+.medias_section article h2{
+    font-weight:normal;
+    /* justify-self: flex-start; */
+    margin-right: auto;
+}
+.medias_section article .likes-nb{
+    font-weight:500;
+    /* display: flex; */
+    /* justify-self: flex-end; */
+    flex-direction: row;
+}
+.heart{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    /* justify-self: flex-end; */
+    cursor: pointer;
+}
+.heart img{
+    width: 28px;
+    height: 26px;
+    overflow:auto;
+}
+
+/* contact form */
+#contact_modal {
+    display: none;
+    /* display: flex; */
+    align-content: center;
+    /* overflow-y: scroll; */
+    z-index:10;
+    position: absolute;
+    top:0;
+    width: 100%;
+    min-height:100vh;
+    box-sizing: border-box;
+}
+.modal_bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100vh;
+    background-color: rgba(255,255,255,0.5);
+
 }
 
 .modal {
+    position: relative;
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
+    /* max-height:100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    overflow-y: scroll;
 }
 
 .modal header {
     justify-content: space-between;
     width: 100%;
+    height:auto;
 }
 
 .modal header img {
@@ -45,32 +192,44 @@
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    text-align: left;
+    margin-bottom: 26px;
 }
 
-form {
+#contact_modal form {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
 }
 
-form label {
+#contact_modal form label {
     color: #312E2E;
     font-size: 36px;
 }
 
-form div {
+#contact_modal form div {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 16px;
 }
 
-form input {
+#contact_modal form input {
     width: 100%;
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+#contact_modal form textarea {
+    width: 100%;
+    height: 170px;
+    border: none;
+    border-radius: 5px;
+}
+
+#contact_modal form button {
+    margin: 10px 0;
 }

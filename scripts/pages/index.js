@@ -1,12 +1,11 @@
     async function getPhotographers() {
         // récupère les données dans le json
-        const photographers = await fetch("../data/photographers.json")
-                                    .then(Responses => {return Responses.json();})
-                                    .then(Responses => {return Responses.photographers;})
-                                    .catch(err => console.log('an error occurs', err));
-
+        const photographersData = new PhotographersApi('../data/photographers.json')
+        console.log(photographersData)
+        const photographers = await photographersData.get()
         // // retourne le tableau photographers
-        return ({photographers: [...photographers]});
+        console.log({photographers: [...photographers.photographers]})
+        return ({photographers: [...photographers.photographers]});
     };
 
     async function displayData(photographers) {
@@ -22,6 +21,7 @@
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
+        console.log(photographers)
         displayData(photographers);
     };
     
