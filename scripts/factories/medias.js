@@ -7,15 +7,19 @@ function mediaFactory(data) {
         thumbName = video.replace('mp4', 'png');
     }
     const thumb =`assets/photographers/thumb/${photographerId}/${thumbName}`;
-    const imageUrl =`assets/photographers/${photographerId}/${image}`;
+
+    let imageUrl = ""
+    if(image){imageUrl =`assets/photographers/${photographerId}/${image}`;}
+    else if(video){imageUrl =`assets/photographers/${photographerId}/${video}`;}
     // console.log(thumbName);
 
     function getMediaCardDOM() {
         const article = document.createElement( 'article' );
         // media modal link
         const medialink = document.createElement( 'a' );
-        medialink.setAttribute("href", imageUrl);
-        medialink.setAttribute("class", "media__link");
+        medialink.setAttribute("href", imageUrl);        
+        if(image){medialink.setAttribute("class", "media__link image");medialink.setAttribute("data-lightbox", "image");}
+        else if(video){medialink.setAttribute("class", "media__link video");medialink.setAttribute("data-lightbox", "video");}
         // photo thumbnail
         const img = document.createElement( 'img' );
         img.setAttribute("src", thumb);
@@ -49,14 +53,4 @@ function mediaFactory(data) {
 
  
     return { title, thumb, getMediaCardDOM }
-}
-
-async function linkMedia (){
-    const mediaLink = document.querySelectorAll(".media__link");
-    
-
-    mediaLink.forEach((lnk) => lnk.addEventListener("click", function(e) {
-        e.preventDefault();
-        lightboxContainer.classList.remove("hidden");
-    }));
 }

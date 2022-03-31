@@ -1,23 +1,3 @@
-class likedMedia {
-    constructor(){
-        this._liked = []
-        const likeBtn = document.querySelectorAll(".heart")
-        let likeNb = document.querySelectorAll(".like-nb")
-
-        likeBtn.forEach((btn) => btn.addEventListener("click", () => {
-            this.classList.add("liked")
-            this.classList.remove("fa-regular")
-            this.classList.add("fa-light")
-        }))
-    }
-    like(media){
-        this._liked.push(media)
-    }
-    unlike(media){
-        this._liked = this._liked.filter(med => med !== media)
-    }
-    
-}
 
 async function likeMedia(){
 
