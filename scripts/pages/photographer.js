@@ -1,6 +1,6 @@
 //id du photographers
 const photographerId =  new URLSearchParams(document.location.search).get("id")
-var photographerMedias = []
+let photographerMediasBase = []
 
 async function getData() {
     // récupère les données dans le json
@@ -14,7 +14,7 @@ async function getData() {
 
 async function displayMedias(medias) {
     const mediasSection = document.querySelector(".medias_section");
-
+    mediasSection.innerHTML=""
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media);
         const mediaCardDOM = mediaModel.getMediaCardDOM();
@@ -53,13 +53,12 @@ async function init() {
     // Filtre les données du photographe
     const photographerDetails = photographers.filter(photographer => photographer.id.toString() === photographerId)  
     // Filtre les medias du photographe
-    photographerMedias = medias.filter(media => media.photographerId.toString() === photographerId)  
+    const photographerMedias = medias.filter(media => media.photographerId.toString() === photographerId)  
     const showDetails = await displayDetails(photographerDetails);
     const listMedias = await displayMedias(photographerMedias);
     const likedMedias = await likeMedia();
     const lightbox = await lightboxInit();
-
-    
+    photographerMediasBase = photographerMedias
 };
 
 init();

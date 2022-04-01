@@ -8,8 +8,9 @@ let mediaIndex = "" //index du media affiché dans la lightbox
 const lightboxMedia = document.getElementById("lightbox__container");
 
 async function lightboxInit (){
-    const mediaLink = document.querySelectorAll(".media__link");
-    const lightboxMedia = document.getElementById("lightbox__container");
+    lightboxList = [] //liste des media de la lightbox
+    let mediaLink = document.querySelectorAll(".media__link");
+    // const lightboxMedia = document.getElementById("lightbox__container");
     
     
     //creation de la liste des medias
