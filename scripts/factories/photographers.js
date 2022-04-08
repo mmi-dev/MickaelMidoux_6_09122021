@@ -51,8 +51,8 @@ function photographerFactory(data) {
         // details
         const details = document.createElement( 'div' );
         // name
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
+        const h1 = document.createElement( 'h1' );
+        h1.textContent = name;
         // location
         const location = document.createElement( 'adresse' );
         location.setAttribute("class", "location");
@@ -62,7 +62,7 @@ function photographerFactory(data) {
         slogan.setAttribute("class", "slogan");
         slogan.textContent = tagline;
         // 
-        details.appendChild(h2);
+        details.appendChild(h1);
         details.appendChild(location);
         details.appendChild(slogan);
         return ({details: details,name: name});

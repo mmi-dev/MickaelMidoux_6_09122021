@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <a href="index.html"><img src="assets/images/logo.png" class="logo" /></a>
+      <a href="index.html"><img src="assets/images/logo.png"  alt="Fisheye home page" class="logo" /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -19,50 +19,67 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <div class="photographer_avatar"></div>
       </div>
-      <div class="sort">
-        <label for="sort-select">Trier par</label>
-        <select name="sort-option" id="sort-select">
-            <option value="">-</option>
-            <option value="bylikes">Popularité</option>
-            <option value="bydate">Date</option>
-            <option value="bytitle">Titre</option>
-        </select>
+      <div class="photograph-footer">
+        <div class="photographer_likes">15230</div>
+        <div class="photographer_price">300€/jour</div>
       </div>
-      <div class="medias_section"></div>
+      <!-- option de tri -->
+      <div class="sort">
+        <div class="sort__label">Trier par</div>
+        <div class="sort__menu">
+          <button class="sort__menu__btn" data-value="bylikes" onclick="this.classList.toggle('active')">
+            <span class="bntText">Popularité</span>
+            <span class="arrow"></span>
+          </button>
+          <ul class="sort__menu__list">
+              <li  class="sort__menu__list-option" hidden data-value="bylikes" onclick="sortMedias(this)">Popularité</li>
+              <li class="sort__menu__list-option" data-value="bydate" onclick="sortMedias(this)" >Date</li>
+              <li class="sort__menu__list-option" data-value="bytitle" onclick="sortMedias(this)" >Titre</li>
+          </ul>
+        </div>
+      </div>
+      <div class="medias_section">
+        <!-- media card here-->
+      </div>
     </main>
+    <!-- lightbox -->
     <div class="lightbox hidden" id="lightbox">
       <button class="lightbox__close" id="lightboxClose">Fermer</button>
-      <button class="lightbox__next" id="lightboxNext">Suivant</button>
-      <button class="lightbox__prev" id="lightboxPrev">Précédent</button>
       <div id="lightbox__container">
-        <img src="http://127.0.0.1:5501/assets/photographers/243/Animals_Rainbow.jpg" alt="Tundefined">
+        <button class="lightbox__prev" id="lightboxPrev">Précédent</button>
+        <div class="lightbox__media">
+          <img src="http://127.0.0.1:5501/assets/photographers/resized/930/Architecture_White_Light.jpg" alt="undefined">
+          <figcaption class="media-title">undefined</figcaption>
+        </div>
+        <button class="lightbox__next" id="lightboxNext">Suivant</button>
       </div>
     </div>
+    <!-- contact form -->
     <div id="contact_modal">
       <div class="modal_bg"></div>
 			<div class="modal">
 				<header>
           <h2 id="modal-title">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" alt="close button" onclick="closeModal()" />
         </header>
 				<form>
 					<div class="text-control" >
-						<label for="prenom">Prénom</label><br>
+						<label for="prenom">Prénom</label>
 						<input class="text-control" type="text" id="prenom" name="prenom" required>
           </div>
           <div class="text-control" >
-						<label for="nom">Nom</label><br>
+						<label for="nom">Nom</label>
 						<input class="text-control" type="text" id="nom" name="nom" required>
           </div>
           <div class="text-control" >
-						<label for="email">Email</label><br>
+						<label for="email">Email</label>
 						<input class="text-control" type="text" id="email" name="email" required>
           </div>
           <div class="text-control" >
-						<label for="message">Votre message</label><br>
+						<label for="message">Votre message</label>
 						<textarea class="text-control" id="message" name="message" required></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="form_button" id="submitForm">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -71,9 +88,10 @@
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/factories/photographers.js"></script>
     <script src="/scripts/factories/medias.js"></script>
+    <script src="/scripts/factories/sort.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/likes/likes.js"></script>
+    <!-- <script src="/scripts/utils/body-scroll-lock.js"></script> -->
     <script src="/scripts/factories/lightbox.js"></script>
-    <script src="/scripts/factories/sort.js"></script>
   </body>
 </html>

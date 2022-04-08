@@ -1,6 +1,10 @@
 @import url("reset.css");
 @import url("photographer.css");
 @import url("lightbox.css");
+*{
+
+    font-family: "DM Sans", sans-serif;
+}
 
 body {
     font-family: "DM Sans", sans-serif;

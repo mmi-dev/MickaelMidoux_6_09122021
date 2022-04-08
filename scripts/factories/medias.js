@@ -9,7 +9,7 @@ function mediaFactory(data) {
     const thumb =`assets/photographers/thumb/${photographerId}/${thumbName}`;
 
     let imageUrl = ""
-    if(image){imageUrl =`assets/photographers/${photographerId}/${image}`;}
+    if(image){imageUrl =`assets/photographers/resized/${photographerId}/${image}`;}
     else if(video){imageUrl =`assets/photographers/${photographerId}/${video}`;}
     // console.log(thumbName);
 
@@ -18,6 +18,7 @@ function mediaFactory(data) {
         // media modal link
         const medialink = document.createElement( 'a' );
         medialink.setAttribute("href", imageUrl);        
+        medialink.setAttribute("data-title", title);
         if(image){medialink.setAttribute("class", "media__link image");medialink.setAttribute("data-lightbox", "image");}
         else if(video){medialink.setAttribute("class", "media__link video");medialink.setAttribute("data-lightbox", "video");}
         // photo thumbnail
