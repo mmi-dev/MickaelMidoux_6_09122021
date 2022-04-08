@@ -16,17 +16,16 @@ async function lightboxInit (){
     
     
     //creation de la liste des medias
-    mediaLink.forEach(lnk => lightboxList.push({"url": lnk.href , "type": lnk.attributes["data-lightbox"].nodeValue}))
+    mediaLink.forEach(lnk => lightboxList.push({"url": lnk.href ,"title": lnk.attributes["data-title"].nodeValue , "type": lnk.attributes["data-lightbox"].nodeValue}))
+    mediaLink.forEach(lnk => {console.log(lnk);});
     //creation de la liste des url
     let urlList = lightboxList.map(el => el.url)
-    // console.log(lightboxList)
+    console.log(lightboxList)
 
     //surveille la selaction d'une image
     mediaLink.forEach((lnk) => lnk.addEventListener("click", function(e) {
         e.preventDefault();
         // chargement de l'image dans la lightbox
-        console.log(this.href);
-        // console.log(this.parentElement.firstChild.getAttribute["data-lightbox"]);
         mediaLoad(this.href, this.attributes["data-title"].nodeValue, this.attributes["data-lightbox"].nodeValue)
 
         //recuperation de l'index du media
@@ -45,29 +44,6 @@ function closeLightbox() {
     document.body.style.overflow = 'auto';
 }
 
-
-// btnPrev.addEventListener("click", function() {
-//     if(mediaIndex == 0){
-//         mediaIndex = lightboxList.length - 1;
-//     }else{
-//         mediaIndex = mediaIndex - 1
-//     }
-    
-//     mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type)
-// });
-
-
-// btnNext.addEventListener("click", function() {
-//     if(mediaIndex == lightboxList.length - 1){
-//         mediaIndex = 0;
-//     }else{
-//         mediaIndex = mediaIndex + 1
-//     }
-    
-//     mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type)
-   
-// });
-
 btnNext.addEventListener("click", ()=>{nextMedia()})
 btnPrev.addEventListener("click", ()=>{prevMedia()})
 
@@ -77,6 +53,7 @@ function prevMedia(){
     }else{
         mediaIndex = mediaIndex - 1
     }
+    console.log(lightboxList[mediaIndex]);
     mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type)
 }
 function nextMedia(){
