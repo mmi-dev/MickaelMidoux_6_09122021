@@ -1,0 +1,107 @@
+*{
+    box-sizing: border-box;
+}
+#lightbox{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 10;
+    padding:50px;
+}
+
+#lightbox.hidden{
+    display:none;
+}
+
+.lightbox__close{
+    position: fixed;
+    background: url("../assets/icons/close-lb.svg") center center / 40px 40px no-repeat;
+    width:80px;
+    height:40px;
+    right:60px;
+    top:60px;
+    z-index: 12;
+}
+
+#lightbox button{
+    border: none;
+    text-indent: -30000px;
+    cursor: pointer;
+}
+
+#lightbox__container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+}
+
+.lightbox__next, .lightbox__prev{
+    border: none;
+    /* display: flex; */
+    width:80px;
+    height:100px;
+    line-height:100%;
+    /* flex-grow: 1; */
+    transform: scale(1);
+    transition: all 0.3s;
+}
+.lightbox__next:hover, .lightbox__prev:hover{
+    transform: scale(1.1);
+}
+
+.lightbox__next{
+    background: url("../assets/icons/arrow-next.svg") center center / 30px 48px no-repeat;
+    
+    /* justify-content:flex-start; */
+    
+}
+.lightbox__prev{
+    background: url("../assets/icons/arrow-prev.svg") center center / 30px 48px no-repeat;
+    /* float: right; */
+}
+
+.lightbox__media{
+    position:relative;
+    display:inline;
+    text-align: center;
+    /* flex-wrap: nowrap; */
+    /* flex-direction: column; */
+    max-height:92vh;
+    width:80%;
+    margin: 4vh 0;
+    /* overflow: hidden; */
+}
+
+#lightbox img, #lightbox video{
+    /* position: relative; */
+    width:100%;
+    max-height:90vh;
+    display: inline-block;
+    object-fit:cover;
+    overflow: hidden;
+    flex-grow: 0;
+    margin: auto;
+}
+
+#lightbox video{
+    width:100%;
+}
+#lightbox__container .media-title{
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    font-size: 24px;
+    /* line-height: 50px; */
+    color: #901C1C;
+    height: 50px;
+    /* margin: auto 0; */
+}
