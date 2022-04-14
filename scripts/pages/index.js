@@ -1,4 +1,4 @@
-   import jsonData from './data/photographers.json'
+   import {jsonData} from '/data/photographers.json'
     
     async function getPhotographers() {
         // récupère les données dans le json
