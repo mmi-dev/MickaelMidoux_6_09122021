@@ -1,6 +1,6 @@
     async function getPhotographers() {
         // récupère les données dans le json
-        const photographersData = new PhotographersApi('../data/photographers.json')
+        const photographersData = new PhotographersApi('./data/photographers.json')
         console.log(photographersData)
         const photographers = await photographersData.get()
         // // retourne le tableau photographers
