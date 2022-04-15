@@ -4,9 +4,10 @@ let photographerMediasBase = [];
 
 async function getData() {
   // récupère les données dans le json
-  const photographersData = new PhotographersApi("../data/photographers.json");
+  const photographersData = new PhotographersApi('data/photographers.json');
   // console.log(photographersData)
   const photographers = await photographersData.get();
+
   // // retourne le tableau photographers
   // console.log({photographers: [...photographers.photographers], medias: [...photographers.media]})
   return {
@@ -75,6 +76,7 @@ async function init() {
   const listMedias = await displayMedias(photographerMedias);
   const likedMedias = await likeMedia();
   const lightbox = await lightboxInit();
+  const sortMenu = await sortMenuInit();
   photographerMediasBase = photographerMedias;
 }
 

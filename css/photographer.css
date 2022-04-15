@@ -226,14 +226,19 @@
 .heart{
     width: 30px;
     height: 30px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     cursor: pointer;
+    border: none;
+    /* line-height: 30px; */
+    background: transparent;
+    color: #901C1C;
+    font-size: 22px;
 }
-.heart img{
+/* .heart i{
     width: 28px;
     height: 26px;
     overflow:auto;
-}
+} */
 
 /* contact form */
 #contact_modal {
