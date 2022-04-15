@@ -17,10 +17,10 @@ async function lightboxInit (){
     
     //creation de la liste des medias
     mediaLink.forEach(lnk => lightboxList.push({"url": lnk.href ,"title": lnk.attributes["data-title"].nodeValue , "type": lnk.attributes["data-lightbox"].nodeValue}))
-    mediaLink.forEach(lnk => {console.log(lnk);});
+    // mediaLink.forEach(lnk => {console.log(lnk);});
     //creation de la liste des url
     let urlList = lightboxList.map(el => el.url)
-    console.log(lightboxList)
+    // console.log(lightboxList)
 
     //surveille la selaction d'une image
     mediaLink.forEach((lnk) => lnk.addEventListener("click", function(e) {
@@ -33,15 +33,23 @@ async function lightboxInit (){
         
         // ouverture de la lightbox
         lightboxWindow.classList.remove("hidden");
+        lightboxWindow.setAttribute('aria-hidden',"false")
+        // document.addEventListener('keydown', (e)=>lightboxKeyboardAction(e))
+        document.addEventListener('keydown', lightboxKeyboardAction)
+        console.log("set focus")
+        btnClose.focus()
         document.body.style.overflow = 'hidden';
     }));
+
 }
 
 btnClose.addEventListener("click", ()=>{closeLightbox()});
 
 function closeLightbox() {
     lightboxWindow.classList.add("hidden");
+    lightboxWindow.setAttribute('aria-hidden',"true")
     document.body.style.overflow = 'auto';
+    document.removeEventListener('keydown', lightboxKeyboardAction)
 }
 
 btnNext.addEventListener("click", ()=>{nextMedia()})
@@ -65,22 +73,7 @@ function nextMedia(){
     mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type)
 }
 
-document.addEventListener('keyup', function(e){
-    console.log("touche: "+ e.key)
-    switch (e.key){
-        case 'Escape':
-            closeLightbox()
-            break
-        case 'ArrowLeft':
-            prevMedia()
-            break
-        case 'ArrowRight':
-            nextMedia()
-            break
-    }
-    
 
-})
 
 function mediaLoad (url, title, type){
  switch(type){
@@ -103,4 +96,19 @@ function createImageElement(url, title){
 
 function createVideoElement(url, title){
     lightboxMedia.innerHTML = `<video controls autoplay src="${url}" alt="${title}"></video><figcaption class="media-title">${title}</figcaption>`
+}
+
+
+function lightboxKeyboardAction(e){
+    switch (e.key){
+        case 'Escape':
+            closeLightbox()
+            break
+        case 'ArrowLeft':
+            prevMedia()
+            break
+        case 'ArrowRight':
+            nextMedia()
+            break
+    }
 }

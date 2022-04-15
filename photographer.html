@@ -11,12 +11,12 @@
   </head>
   <body>
     <header>
-      <a href="index.html"><img src="assets/images/logo.png"  alt="Fisheye home page" class="logo" /></a>
+      <a href="index.html"><img src="assets/images/logo.png"  alt="retour sur la page d'accueil" class="logo" /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
         <div class="photographer_details"></div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" aria-label="contactez moi" onclick="displayModal()">Contactez-moi</button>
         <div class="photographer_avatar"></div>
       </div>
       <div class="photograph-footer">
@@ -27,15 +27,15 @@
       <div class="sort">
         <div class="sort__label">Trier par</div>
         <div class="sort__menu">
-          <button class="sort__menu__btn" data-value="bylikes" onclick="this.classList.toggle('active')">
+          <button aria-expanded="false" aria-haspopup="listbox" aria-label="trier par" class="sort__menu__btn" data-value="bylikes" onclick="this.classList.toggle('active')" aria-haspopup="listbox">
             <span class="bntText">Popularité</span>
             <span class="arrow"></span>
           </button>
-          <ul class="sort__menu__list">
-              <li  class="sort__menu__list-option" hidden data-value="bylikes" onclick="sortMedias(this)">Popularité</li>
-              <li class="sort__menu__list-option" data-value="bydate" onclick="sortMedias(this)" >Date</li>
-              <li class="sort__menu__list-option" data-value="bytitle" onclick="sortMedias(this)" >Titre</li>
-          </ul>
+          <ul role="listbox" id="sort-option-list" aria-label="liste des options de tri" class="sort__menu__list" aria-activedescendant="sort2">
+            <li role="option" tabindex="0" id="sort1" class="sort__menu__list-option" hidden data-value="bylikes" onclick="sortMedias(this)">Popularité</li>
+            <li role="option" tabindex="0" id="sort2" class="sort__menu__list-option" data-value="bydate" onclick="sortMedias(this)" ><a>Date</a></li>
+            <li role="option" tabindex="0" id="sort3" class="sort__menu__list-option" data-value="bytitle" onclick="sortMedias(this)" ><a>Titre</a> </li>
+    </ul> 
         </div>
       </div>
       <div class="medias_section">
@@ -43,24 +43,24 @@
       </div>
     </main>
     <!-- lightbox -->
-    <div class="lightbox hidden" id="lightbox" role="dialog" aria-label="vue agrandie de l'image">
-      <button class="lightbox__close" id="lightboxClose">Fermer</button>
+    <div class="lightbox hidden" aria-hidden="true" id="lightbox" role="dialog" aria-label="vue agrandie de l'image">
+      <button class="lightbox__close" id="lightboxClose" aria-label="fermer la lightbox">Fermer</button>
       <div id="lightbox__container">
-        <button class="lightbox__prev" id="lightboxPrev">Précédent</button>
-        <div class="lightbox__media">
+        <button class="lightbox__prev" id="lightboxPrev" aria-label="image précédente">Précédent</button>
+        <figure class="lightbox__media">
           <img src="http://127.0.0.1:5501/assets/photographers/resized/930/Architecture_White_Light.jpg" alt="undefined">
           <figcaption class="media-title">undefined</figcaption>
-        </div>
-        <button class="lightbox__next" id="lightboxNext">Suivant</button>
+        </figure>
+        <button class="lightbox__next" id="lightboxNext" aria-label="image suivante">Suivant</button>
       </div>
     </div>
     <!-- contact form -->
-    <div id="contact_modal" role="dialog">
+    <div id="contact_modal" role="dialog" aria-labelledby="modal-title">
       <div class="modal_bg"></div>
 			<div class="modal">
 				<header>
           <h2 id="modal-title">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" alt="close button" onclick="closeModal()" />
+          <img tabindex="0" id="close-contact" src="assets/icons/close.svg" alt="close button" aria-label="fermer le formulaire" onclick="closeModal()" />
         </header>
 				<form>
 					<div class="text-control" >
@@ -79,7 +79,7 @@
 						<label for="message">Votre message</label>
 						<textarea class="text-control" id="message" name="message" required></textarea>
 					</div>
-          <button class="form_button" id="submitForm">Envoyer</button>
+          <button class="form_button" id="submitForm" aria-label="envoyer">Envoyer</button>
 				</form>
 			</div>
 		</div>
