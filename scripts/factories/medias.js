@@ -19,7 +19,7 @@ function mediaFactory(data) {
         const medialink = document.createElement( 'a' );
         medialink.setAttribute("href", imageUrl);        
         medialink.setAttribute("data-title", title);
-        medialink.setAttribute("tabindex", "0");   
+        // medialink.setAttribute("tabindex", "0");   
         if(image){medialink.setAttribute("class", "media__link image");medialink.setAttribute("data-lightbox", "image");}
         else if(video){medialink.setAttribute("class", "media__link video");medialink.setAttribute("data-lightbox", "video");}
         // photo thumbnail
@@ -29,6 +29,7 @@ function mediaFactory(data) {
         img.setAttribute("class", "thumbnail");
         img.setAttribute("loading", "lazy");
         img.setAttribute("id", id.toString());
+        // img.setAttribute("tabindex", "0");   
         // photo details
         const details = document.createElement( 'div' );
         details.setAttribute("class", "media-details");
@@ -42,7 +43,7 @@ function mediaFactory(data) {
         liked.textContent = likes.toString();
         const heart = document.createElement( 'button' );
         heart.setAttribute("class", "heart");
-        // heart.setAttribute("tabindex", "0");     
+        heart.setAttribute("aria-label", "like");    
         heart.innerHTML = `<i class="fa-regular fa-heart"></i>`
         // 
         article.appendChild(medialink);

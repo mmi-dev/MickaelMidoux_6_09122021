@@ -11,6 +11,7 @@ async function likeMedia(){
         // console.log(likeNb.innerHTML)
         if(this.classList.contains("liked")==true){
             this.classList.remove("liked")
+            this.setAttribute("aria-label","like")
             this.innerHTML = this.innerHTML.replace("solid","regular")
             // this.parentElement.getElementsByClassName("likes-nb")[0].classList.remove("inc")
             likeNb = Number(likeNb) - 1
@@ -20,6 +21,7 @@ async function likeMedia(){
         }
         else{
             this.classList.add("liked")
+            this.setAttribute("aria-label","dislike")
             this.innerHTML = this.innerHTML.replace("regular","solid")
             // this.parentElement.getElementsByClassName("likes-nb")[0].classList.add("inc")
             likeNb = Number(likeNb) + 1

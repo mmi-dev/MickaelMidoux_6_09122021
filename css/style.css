@@ -90,3 +90,7 @@ h1 {
 .photographer_section article:hover img{
    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
+
+:focus-visible{
+    border: 2px solid blue;
+}

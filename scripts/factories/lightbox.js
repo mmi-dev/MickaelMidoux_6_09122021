@@ -36,8 +36,7 @@ async function lightboxInit (){
         lightboxWindow.setAttribute('aria-hidden',"false")
         // document.addEventListener('keydown', (e)=>lightboxKeyboardAction(e))
         document.addEventListener('keydown', lightboxKeyboardAction)
-        console.log("set focus")
-        btnClose.focus()
+        lightboxMedia.focus()
         document.body.style.overflow = 'hidden';
     }));
 
