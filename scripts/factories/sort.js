@@ -6,9 +6,6 @@ const filterList= document.getElementById("sort-option-list")
 
 async function sortMedias(optionElement) {
 
-  // e.preventDefault();
-  // console.log(e)
-
   let photographerMediassorted = [...photographerMediasBase]
 
   switch (optionElement.attributes['data-value'].nodeValue) {
@@ -109,14 +106,20 @@ document.addEventListener('click',function(e){
   })
 
   filterOptions.forEach(options=>{
+    console.log(options)
+
     options.addEventListener('keydown', function(e){
       switch (e.key){
         case 'Enter':
-
         e.preventDefault()
             document.activeElement.click();
             filterBtn.focus();
             break
+            case ' ': // touche espace
+            e.preventDefault()
+                document.activeElement.click();
+                filterBtn.focus();
+                break
         case 'Escape':
           e.preventDefault()
             filterBtn.classList.remove("active")

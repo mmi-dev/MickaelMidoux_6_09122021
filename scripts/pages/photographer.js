@@ -5,11 +5,9 @@ let photographerMediasBase = [];
 async function getData() {
   // récupère les données dans le json
   const photographersData = new PhotographersApi('data/photographers.json');
-  // console.log(photographersData)
   const photographers = await photographersData.get();
 
   // // retourne le tableau photographers
-  // console.log({photographers: [...photographers.photographers], medias: [...photographers.media]})
   return {
     photographers: [...photographers.photographers],
     medias: [...photographers.media],
@@ -46,7 +44,6 @@ async function displayDetails(photographer) {
       modalTitle.innerHTML +
       `<br>` +
       photographerDetailsModel.getPhotographerDetailsDOM().name;
-    // console.log(photographerDetailsDOM);
   } else {
     console.log("photographe non trouvé ???");
   }
@@ -58,13 +55,18 @@ async function displayDetails(photographer) {
 }
 
 async function init() {
+    // ste formulaire action pour retour sur la page
+    document.getElementById("contact-form").action = document.location.href
+
   // Récupère les données des photographes
   const { photographers, medias } = await getData();
-
   // Filtre les données du photographe
   const photographerDetails = photographers.filter(
     (photographer) => photographer.id.toString() === photographerId
   );
+    // set page title
+//   document.title = "Profile de " + photographerDetails[0].name;
+
   // Filtre les medias du photographe
   const photographerMedias = medias.filter(
     (media) => media.photographerId.toString() === photographerId
@@ -78,6 +80,9 @@ async function init() {
   const lightbox = await lightboxInit();
   const sortMenu = await sortMenuInit();
   photographerMediasBase = photographerMedias;
+
+  // suppression du comportement par default de la touche espace pour action sur les Liens
+  const actionOnLink = await keyboardActionOnLink();
 }
 
 init();
