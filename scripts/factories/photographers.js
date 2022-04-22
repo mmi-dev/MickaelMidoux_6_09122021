@@ -1,24 +1,19 @@
 function photographerFactory(data) {
 
-    // console.log(data);
     const { name, id, portrait, city, country, tagline, price } = data;
     
     const picture = `assets/photographers/thumb/id-photos/${portrait}`;
-
-    // function getTest() {
-    //     console.log("Test");
-    //     return console.log("Teste");
-    // };
     
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
         // photographer page link
         const pagelink = document.createElement( 'a' );
         pagelink.setAttribute("href", "photographer.html?id="+id);
+        pagelink.setAttribute("aria-label", "");
         // photographer photo
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
-        img.setAttribute("alt", "photo de profil de "+name);
+        img.setAttribute("alt", "photo de profil de : "+name);
         // photographer name
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
@@ -36,7 +31,7 @@ function photographerFactory(data) {
         const rate = document.createElement( 'p' );
         rate.setAttribute("class", "rate");
         rate.textContent = price+"€/jour";
-        // 
+        //  insertion des enfants dans l'élément article
         article.appendChild(pagelink);
         pagelink.appendChild(img);
         pagelink.appendChild(h2);
@@ -61,7 +56,7 @@ function photographerFactory(data) {
         const slogan = document.createElement( 'blockquote' );
         slogan.setAttribute("class", "slogan");
         slogan.textContent = tagline;
-        // 
+        // insertion des enfants dans l'élément détails
         details.appendChild(h1);
         details.appendChild(location);
         details.appendChild(slogan);
@@ -72,7 +67,7 @@ function photographerFactory(data) {
         // photo thumbnail
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
-        img.setAttribute("alt", name);
+        img.setAttribute("alt", "photo de profil de : " + name);
 
         return (img);
 

@@ -43,7 +43,7 @@ const email = document.getElementById("email");
 const message = document.getElementById("message");
 const submitBtn = document.getElementById("submitForm");
 
-submitBtn.onclick = function(e) {
+submitBtn.onsubmit = function(e) {
     e.preventDefault();
     console.log(
         "data: \n", 
@@ -52,4 +52,6 @@ submitBtn.onclick = function(e) {
         "email: " + email.value +"\n",
         "message: " + message.value +"\n",
     );
+    
+
 }

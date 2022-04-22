@@ -22,7 +22,10 @@
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
         console.log(photographers)
-        displayData(photographers);
+        const userCards = await displayData(photographers);
+
+        // suppression du comportement par default de la touche espace pour action sur les Liens
+        const actionOnLink = await keyboardActionOnLink();
     };
     
     init();

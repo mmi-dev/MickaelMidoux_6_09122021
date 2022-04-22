@@ -8,6 +8,7 @@ let lightboxList = [] //liste des media de la lightbox
 let mediaIndex = "" //index du media affiché dans la lightbox
 
 const lightboxMedia = document.querySelector(".lightbox__media");
+const lightboxContainer = document.querySelector("#lightbox__container");
 
 async function lightboxInit (){
     lightboxList = [] //liste des media de la lightbox
@@ -16,7 +17,7 @@ async function lightboxInit (){
     
     
     //creation de la liste des medias
-    mediaLink.forEach(lnk => lightboxList.push({"url": lnk.href ,"title": lnk.attributes["data-title"].nodeValue , "type": lnk.attributes["data-lightbox"].nodeValue}))
+    mediaLink.forEach(lnk => lightboxList.push({"url": lnk.href ,"title": lnk.attributes["data-title"].nodeValue , "type": lnk.attributes["data-lightbox"].nodeValue, "description": lnk.attributes["data-description"].nodeValue}))
     // mediaLink.forEach(lnk => {console.log(lnk);});
     //creation de la liste des url
     let urlList = lightboxList.map(el => el.url)
@@ -26,7 +27,7 @@ async function lightboxInit (){
     mediaLink.forEach((lnk) => lnk.addEventListener("click", function(e) {
         e.preventDefault();
         // chargement de l'image dans la lightbox
-        mediaLoad(this.href, this.attributes["data-title"].nodeValue, this.attributes["data-lightbox"].nodeValue)
+        mediaLoad(this.href, this.attributes["data-title"].nodeValue, this.attributes["data-lightbox"].nodeValue, this.attributes["data-description"].nodeValue)
 
         //recuperation de l'index du media
         mediaIndex = urlList.indexOf(this.href)
@@ -36,7 +37,6 @@ async function lightboxInit (){
         lightboxWindow.setAttribute('aria-hidden',"false")
         // document.addEventListener('keydown', (e)=>lightboxKeyboardAction(e))
         document.addEventListener('keydown', lightboxKeyboardAction)
-        console.log("set focus")
         btnClose.focus()
         document.body.style.overflow = 'hidden';
     }));
@@ -62,7 +62,7 @@ function prevMedia(){
         mediaIndex = mediaIndex - 1
     }
     console.log(lightboxList[mediaIndex]);
-    mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type)
+    mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type, lightboxList[mediaIndex].description )
 }
 function nextMedia(){
     if(mediaIndex == lightboxList.length - 1){
@@ -70,32 +70,32 @@ function nextMedia(){
     }else{
         mediaIndex = mediaIndex + 1
     }
-    mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type)
+    mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type, lightboxList[mediaIndex].description)
 }
 
 
 
-function mediaLoad (url, title, type){
+function mediaLoad (url, title, type, description){
  switch(type){
      case 'image':
         // console.log('case: image -> ' + type);
-        createImageElement(url, title);
+        createImageElement(url, title, description);
         break;
     case 'video':
         // console.log('case: video -> ' + type);
-        createVideoElement(url, title);
+        createVideoElement(url, title, description);
         break;
     default:
         console.log('media non pris en charge par la lightbox');
  }
 }
 
-function createImageElement(url, title){
-    lightboxMedia.innerHTML = `<img src="${url}" alt="${title}"><figcaption class="media-title">${title}</figcaption>`
+function createImageElement(url, title, description){
+    lightboxMedia.innerHTML = `<img src="${url}" id="lightbox-media" alt="${description}" aria-live="assertive" aria-label="${description}"><figcaption class="media-title">${title}</figcaption>`
 }
 
-function createVideoElement(url, title){
-    lightboxMedia.innerHTML = `<video controls autoplay src="${url}" alt="${title}"></video><figcaption class="media-title">${title}</figcaption>`
+function createVideoElement(url, title , description){
+    lightboxMedia.innerHTML = `<video controls autoplay src="${url}" id="lightbox-media" alt="${description}" aria-live="assertive" aria-label="${description}"></video><figcaption class="media-title">${title}</figcaption>`
 }
 
 

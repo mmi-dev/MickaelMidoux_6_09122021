@@ -7,16 +7,16 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <title>Profil du photographe...</title>
   </head>
   <body>
     <header>
-      <a href="index.html"><img src="assets/images/logo.png"  alt="retour sur la page d'accueil" class="logo" /></a>
+      <a href="index.html" aria-label="lien pour retourner sur la page d'accueil"><img src="assets/images/logo.png"  alt="retour sur la page d'accueil" class="logo" /></a>
     </header>
     <main id="main">
       <div class="photograph-header">
         <div class="photographer_details"></div>
-        <button class="contact_button" aria-label="contactez moi" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" aria-label="contactez ce photographe" onclick="displayModal()">Contactez-moi</button>
         <div class="photographer_avatar"></div>
       </div>
       <div class="photograph-footer">
@@ -25,16 +25,16 @@
       </div>
       <!-- option de tri -->
       <div class="sort">
-        <div class="sort__label">Trier par</div>
+        <div id="sort-label" class="sort__label">Trier par</div>
         <div class="sort__menu">
-          <button aria-expanded="false" aria-haspopup="listbox" aria-label="trier par" class="sort__menu__btn" data-value="bylikes" onclick="this.classList.toggle('active')" aria-haspopup="listbox">
+          <button id="sort-btn" aria-expanded="false" aria-describedby="sort-label sort-btn" class="sort__menu__btn" data-value="bylikes" onclick="this.classList.toggle('active')" aria-haspopup="listbox">
             <span class="bntText">Popularité</span>
             <span class="arrow"></span>
           </button>
-          <ul role="listbox" id="sort-option-list" aria-label="liste des options de tri" class="sort__menu__list" aria-activedescendant="sort2">
-            <li role="option" tabindex="0" id="sort1" class="sort__menu__list-option" hidden data-value="bylikes" onclick="sortMedias(this)">Popularité</li>
-            <li role="option" tabindex="0" id="sort2" class="sort__menu__list-option" data-value="bydate" onclick="sortMedias(this)" ><a>Date</a></li>
-            <li role="option" tabindex="0" id="sort3" class="sort__menu__list-option" data-value="bytitle" onclick="sortMedias(this)" ><a>Titre</a> </li>
+          <ul role="listbox" id="sort-option-list" aria-label="options de tri" class="sort__menu__list" aria-activedescendant="sort2">
+            <li role="option" aria-label="option de tri par popularité" tabindex="0" id="sort1" class="sort__menu__list-option" hidden data-value="bylikes" onclick="sortMedias(this)">Popularité</li>
+            <li role="option" aria-label="option de tri par date" tabindex="0" id="sort2" class="sort__menu__list-option" data-value="bydate" onclick="sortMedias(this)" ><a>Date</a></li>
+            <li role="option" aria-label="option de tri par titre" tabindex="0" id="sort3" class="sort__menu__list-option" data-value="bytitle" onclick="sortMedias(this)" ><a>Titre</a> </li>
     </ul> 
         </div>
       </div>
@@ -45,11 +45,11 @@
     <!-- lightbox -->
     <div class="lightbox hidden" aria-hidden="true" id="lightbox" role="dialog" aria-label="vue agrandie de l'image">
       <button class="lightbox__close" id="lightboxClose" aria-label="fermer la lightbox">Fermer</button>
-      <div id="lightbox__container">
+      <div aria-labelledby="lightbox-media" id="lightbox__container">
         <button class="lightbox__prev" id="lightboxPrev" aria-label="image précédente">Précédent</button>
-        <figure class="lightbox__media">
-          <img src="http://127.0.0.1:5501/assets/photographers/resized/930/Architecture_White_Light.jpg" alt="undefined">
-          <figcaption class="media-title">undefined</figcaption>
+        <figure aria-describeby="lightbox-media" aria-live="assertive" class="lightbox__media">
+          <img id="lightbox-media" src="#" alt="#">
+          <figcaption class="media-title">#</figcaption>
         </figure>
         <button class="lightbox__next" id="lightboxNext" aria-label="image suivante">Suivant</button>
       </div>
@@ -62,18 +62,22 @@
           <h2 id="modal-title">Contactez-moi</h2>
           <img tabindex="0" id="close-contact" src="assets/icons/close.svg" alt="close button" aria-label="fermer le formulaire" onclick="closeModal()" />
         </header>
-				<form>
+				<form methode="get" id="contact-form" name="contact-form">
 					<div class="text-control" >
+						<!-- <label for="photographer-id">Prénom</label> -->
+						<input type="hidden" id="photographer-id" name="id" value="930">
+          </div>
+          <div class="text-control" >
 						<label for="prenom">Prénom</label>
-						<input class="text-control" type="text" id="prenom" name="prenom" required>
+						<input class="text-control" type="text" id="prenom" name="prenom" pattern="^[A-Za-zÀ-ÿ\s-]{2,}$" required>
           </div>
           <div class="text-control" >
 						<label for="nom">Nom</label>
-						<input class="text-control" type="text" id="nom" name="nom" required>
+						<input class="text-control" type="text" id="nom" name="nom" pattern="^[A-Za-zÀ-ÿ\s-]{2,}$" required>
           </div>
           <div class="text-control" >
 						<label for="email">Email</label>
-						<input class="text-control" type="text" id="email" name="email" required>
+						<input class="text-control" type="text" id="email" name="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
           </div>
           <div class="text-control" >
 						<label for="message">Votre message</label>
@@ -86,6 +90,7 @@
     <script src="https://kit.fontawesome.com/5028612671.js" crossorigin="anonymous"></script>
     <script src="scripts/api/api.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/keyboard.js"></script>
     <script src="scripts/factories/photographers.js"></script>
     <script src="scripts/factories/medias.js"></script>
     <script src="scripts/factories/sort.js"></script>
