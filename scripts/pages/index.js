@@ -1,10 +1,10 @@
   async function getPhotographers() {
         // récupère les données dans le json
         const photographersData = new PhotographersApi('data/photographers.json')
-        console.log(photographersData)
+        // console.log(photographersData)
         const photographers = await photographersData.get()
         // // retourne le tableau photographers
-        console.log({photographers: [...photographers.photographers]})
+        // console.log({photographers: [...photographers.photographers]})
         return ({photographers: [...photographers.photographers]});
     };
 
@@ -21,7 +21,7 @@
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
-        console.log(photographers)
+        // console.log(photographers)
         const userCards = await displayData(photographers);
 
         // suppression du comportement par default de la touche espace pour action sur les Liens

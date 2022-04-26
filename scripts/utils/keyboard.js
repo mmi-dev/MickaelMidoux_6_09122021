@@ -1,4 +1,5 @@
 async function keyboardActionOnLink(){
+
     const linkElements = document.querySelectorAll("a")
 
     linkElements.forEach(link=>{

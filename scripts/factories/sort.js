@@ -33,10 +33,12 @@ async function sortMedias(optionElement) {
   }
 
   //actualise le menu de tri
+  filterBtn.focus();
   filterBtn.querySelector("span").innerHTML=optionElement.innerHTML
   filterBtn.classList.remove("active")
+  filterBtn.setAttribute("aria-expanded","false")
   filterOptions.forEach(options=>{
-    options.removeAttribute("hidden")
+  options.removeAttribute("hidden")
   })
 
   optionElement.setAttribute("hidden", true)
@@ -44,6 +46,10 @@ async function sortMedias(optionElement) {
   const listMedias = await displayMedias(photographerMediassorted); 
   const likedMedias = await likeMedia();
   const lightbox = await lightboxInit();
+
+
+        // suppression du comportement par default de la touche espace pour action sur les Liens
+        const actionOnLink = await keyboardActionOnLink();
 }
 
 
@@ -55,6 +61,7 @@ document.addEventListener('click',function(e){
   // fermeture du menu de tri si on click en dehors
   if(!filterMenu.contains(e.target)){
     filterBtn.classList.remove("active")
+    filterBtn.setAttribute("aria-expanded","false")
   }
 })
 
@@ -68,6 +75,8 @@ document.addEventListener('click',function(e){
     // fermeture du menu de tri si aucun élément de la liste n'est selectionné
     if(!filterMenu.contains(document.activeElement)){
       filterBtn.classList.remove("active")
+      filterBtn.setAttribute('aria-expanded','false')
+
     }
   })
 
@@ -77,13 +86,16 @@ document.addEventListener('click',function(e){
     switch (e.key){
       case 'Escape':
         e.preventDefault()
-          filterBtn.classList.remove("active")
+        filterBtn.classList.remove("active")
+        filterBtn.setAttribute('aria-expanded','false')
+
           filterBtn.focus();
           break
       case 'ArrowUp':
         e.preventDefault()
         filterBtn.classList.remove("active")
-        console.log('spy')
+        filterBtn.setAttribute('aria-expanded','false')
+
           break
       case 'ArrowDown':
         e.preventDefault()
@@ -97,7 +109,7 @@ document.addEventListener('click',function(e){
             index=0
           }
         }else{
-          filterBtn.classList.add('active')
+          sortMenu(filterBtn)
         }
         
           
@@ -106,8 +118,6 @@ document.addEventListener('click',function(e){
   })
 
   filterOptions.forEach(options=>{
-    console.log(options)
-
     options.addEventListener('keydown', function(e){
       switch (e.key){
         case 'Enter':
@@ -122,15 +132,15 @@ document.addEventListener('click',function(e){
                 break
         case 'Escape':
           e.preventDefault()
-            filterBtn.classList.remove("active")
+            sortMenu(e)
             filterBtn.focus();
             break
         case 'ArrowUp':
           e.preventDefault()
           if(index == 0){
             
-          filterBtn.focus();
-          index=-1
+            filterBtn.focus();
+            index=-1
           }else if(index == 1 && optionsList.querySelectorAll('li')[0].hasAttribute('hidden')){
             filterBtn.focus();
             index=-1
@@ -146,9 +156,9 @@ document.addEventListener('click',function(e){
         case 'ArrowDown':
           e.preventDefault()
             if(index == optionsLen){
-              console.log("fin de liste")
+              
             }else if(index == optionsLen -1 && optionsList.querySelectorAll('li')[index+1].hasAttribute('hidden')){
-              console.log("fin de liste")
+              
             }
             else if(optionsList.querySelectorAll('li')[index+1].hasAttribute('hidden')){
               index = index + 2
@@ -161,4 +171,14 @@ document.addEventListener('click',function(e){
       }
     })
   })
+}
+
+function sortMenu(e){
+  // ouverture ou fermeture du menu des options de tri
+  e.classList.toggle('active')
+  if(e.getAttribute('aria-expanded')=="true"){
+    e.setAttribute('aria-expanded','false')
+  }else{
+    e.setAttribute('aria-expanded','true')
+  }
 }

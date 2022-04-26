@@ -64,8 +64,12 @@ async function init() {
   const photographerDetails = photographers.filter(
     (photographer) => photographer.id.toString() === photographerId
   );
+
     // set page title
-//   document.title = "Profile de " + photographerDetails[0].name;
+    document.title = "Profile de " + photographerDetails[0].name;
+    // set description bouton contactez-moi
+  document.querySelector(".contact_button").setAttribute("aria-label", "contactez " + photographerDetails[0].name);
+
 
   // Filtre les medias du photographe
   const photographerMedias = medias.filter(
