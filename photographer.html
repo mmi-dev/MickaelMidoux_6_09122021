@@ -27,7 +27,7 @@
       <div class="sort">
         <div id="sort-label" class="sort__label">Trier par</div>
         <div class="sort__menu">
-          <button id="sort-btn" aria-expanded="false" aria-describedby="sort-label sort-btn" class="sort__menu__btn" data-value="bylikes" onclick="this.classList.toggle('active')" aria-haspopup="listbox">
+          <button id="sort-btn" aria-expanded="false" aria-describedby="sort-label sort-btn" class="sort__menu__btn" data-value="bylikes" onclick="sortMenu(event.target)" aria-haspopup="listbox">
             <span class="bntText">Popularité</span>
             <span class="arrow"></span>
           </button>
@@ -47,7 +47,8 @@
       <button class="lightbox__close" id="lightboxClose" aria-label="fermer la lightbox">Fermer</button>
       <div aria-labelledby="lightbox-media" id="lightbox__container">
         <button class="lightbox__prev" id="lightboxPrev" aria-label="image précédente">Précédent</button>
-        <figure aria-describeby="lightbox-media" aria-live="assertive" class="lightbox__media">
+        <!-- <figure aria-describeby="lightbox-media" aria-live="assertive" class="lightbox__media"> -->
+        <figure class="lightbox__media">
           <img id="lightbox-media" src="#" alt="#">
           <figcaption class="media-title">#</figcaption>
         </figure>
@@ -62,7 +63,7 @@
           <h2 id="modal-title">Contactez-moi</h2>
           <img tabindex="0" id="close-contact" src="assets/icons/close.svg" alt="close button" aria-label="fermer le formulaire" onclick="closeModal()" />
         </header>
-				<form methode="get" id="contact-form" name="contact-form">
+				<form method="get" id="contact-form" name="contact-form" onsubmit="formSubmit(event);">
 					<div class="text-control" >
 						<!-- <label for="photographer-id">Prénom</label> -->
 						<input type="hidden" id="photographer-id" name="id" value="930">

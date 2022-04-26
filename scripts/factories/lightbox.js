@@ -6,6 +6,7 @@ const btnNext = document.getElementById("lightboxNext");
 const lightboxWindow = document.getElementById("lightbox");
 let lightboxList = [] //liste des media de la lightbox
 let mediaIndex = "" //index du media affiché dans la lightbox
+let activeMedia = "" //nom du media affiché dans la lightbox
 
 const lightboxMedia = document.querySelector(".lightbox__media");
 const lightboxContainer = document.querySelector("#lightbox__container");
@@ -50,6 +51,7 @@ function closeLightbox() {
     lightboxWindow.setAttribute('aria-hidden',"true")
     document.body.style.overflow = 'auto';
     document.removeEventListener('keydown', lightboxKeyboardAction)
+    document.querySelector(`[data-title='${activeMedia}']`).focus();
 }
 
 btnNext.addEventListener("click", ()=>{nextMedia()})
@@ -61,7 +63,6 @@ function prevMedia(){
     }else{
         mediaIndex = mediaIndex - 1
     }
-    console.log(lightboxList[mediaIndex]);
     mediaLoad(lightboxList[mediaIndex].url, lightboxList[mediaIndex].title, lightboxList[mediaIndex].type, lightboxList[mediaIndex].description )
 }
 function nextMedia(){
@@ -76,6 +77,7 @@ function nextMedia(){
 
 
 function mediaLoad (url, title, type, description){
+    activeMedia = title
  switch(type){
      case 'image':
         // console.log('case: image -> ' + type);
@@ -95,7 +97,7 @@ function createImageElement(url, title, description){
 }
 
 function createVideoElement(url, title , description){
-    lightboxMedia.innerHTML = `<video controls autoplay src="${url}" id="lightbox-media" alt="${description}" aria-live="assertive" aria-label="${description}"></video><figcaption class="media-title">${title}</figcaption>`
+    lightboxMedia.innerHTML = `<video controls autoplay src="${url}" id="lightbox-media" alt="${description}""></video><div id="description" aria-live="assertive" aria-label="${description}"></div><figcaption class="media-title">${title}</figcaption>`
 }
 
 
