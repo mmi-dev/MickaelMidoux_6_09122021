@@ -2,6 +2,7 @@ const btnClose = document.getElementById('lightboxClose')
 const btnPrev = document.getElementById('lightboxPrev')
 const btnNext = document.getElementById('lightboxNext')
 const lightboxWindow = document.getElementById('lightbox')
+const mainContent = document.getElementById('main')
 let lightboxList = [] // liste des media de la lightbox
 let mediaIndex = '' // index du media affiché dans la lightbox
 let activeMedia = '' // nom du media affiché dans la lightbox
@@ -13,6 +14,7 @@ const lightboxContainer = document.querySelector('#lightbox__container')
 function closeLightbox() {
   lightboxWindow.classList.add('hidden')
   lightboxWindow.setAttribute('aria-hidden', 'true')
+  mainContent.setAttribute('aria-hidden', 'false')
   document.body.style.overflow = 'auto'
   // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', lightboxKeyboardAction)
@@ -20,11 +22,11 @@ function closeLightbox() {
 }
 
 function createImageElement(url, title, description) {
-  lightboxMedia.innerHTML = `<img src="${url}" id="lightbox-media" alt="${description}" aria-live="assertive" aria-label="${description}"><figcaption class="media-title">${title}</figcaption>`
+  lightboxMedia.innerHTML = `<a id="active-media" href="#" aria-labeledby="lightbox-media"><img src="${url}" id="lightbox-media" alt="${description}" aria-live="assertive" aria-label="${description}"></a><figcaption class="media-title">${title}</figcaption>`
 }
 
 function createVideoElement(url, title, description) {
-  lightboxMedia.innerHTML = `<video controls autoplay src="${url}" id="lightbox-media" alt="${description}""></video><div id="description" aria-live="assertive" aria-label="${description}"></div><figcaption class="media-title">${title}</figcaption>`
+  lightboxMedia.innerHTML = `<a id="active-media" href="#" aria-labeledby="lightbox-media"><video controls autoplay src="${url}" id="lightbox-media" alt="${description}""></video><div id="description" aria-live="assertive" aria-label="${description}"></div></a><figcaption class="media-title">${title}</figcaption>`
 }
 
 function mediaLoad(url, title, type, description) {
@@ -103,6 +105,7 @@ async function lightboxInit() {
   const mediaLink = document.querySelectorAll('.media__link')
   // const lightboxMedia = document.getElementById("lightbox__container");
 
+  mainContent.setAttribute('aria-hidden', 'true')
   // creation de la liste des medias
   mediaLink.forEach((lnk) =>
     lightboxList.push({
@@ -145,7 +148,9 @@ async function lightboxInit() {
       lightboxWindow.classList.remove('hidden')
       lightboxWindow.setAttribute('aria-hidden', 'false')
       document.addEventListener('keydown', lightboxKeyboardAction)
-      btnClose.focus()
+      const media = document.getElementById('active-media')
+      // btnClose.focus()
+      media.focus()
       document.body.style.overflow = 'hidden'
     })
   )

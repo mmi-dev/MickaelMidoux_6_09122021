@@ -10,7 +10,7 @@ function photographerFactory(data) {
     // photographer page link
     const pagelink = document.createElement('a')
     pagelink.setAttribute('href', `photographer.html?id=${id}`)
-    pagelink.setAttribute('aria-label', '')
+    pagelink.setAttribute('aria-label', `profil de : ${name}`)
     // photographer photo
     const img = document.createElement('img')
     img.setAttribute('src', picture)
@@ -23,15 +23,20 @@ function photographerFactory(data) {
     // photographer location
     const location = document.createElement('adresse')
     location.setAttribute('class', 'location')
+    // location.setAttribute('aria-hidden', 'true')
+    location.setAttribute('aria-label', `photographe basé à :`)
     location.textContent = `${city}, ${country}`
     // photographer slogan
     const slogan = document.createElement('blockquote')
     slogan.setAttribute('class', 'slogan')
+    // slogan.setAttribute('aria-hidden', 'true')
     slogan.textContent = tagline
     // photographer price
     const rate = document.createElement('p')
     rate.setAttribute('class', 'rate')
-    rate.textContent = `${price}€/jour`
+    // rate.setAttribute('aria-hidden', 'true')
+    rate.setAttribute('aria-label', `tarif :`)
+    rate.textContent = `${price} €/jour`
     //  insertion des enfants dans l'élément article
     article.appendChild(pagelink)
     pagelink.appendChild(img)
